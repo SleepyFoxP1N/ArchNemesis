@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         playerControls = new PlayerInputAction();
-        PlayerState.Instance.CurrentState = PlayerState.PlayerStateEnum.Idle;
+        PlayerStateHandler.Instance.CurrentState = PlayerStateHandler.PlayerStateEnum.Idle;
     }
 
     private void OnEnable()

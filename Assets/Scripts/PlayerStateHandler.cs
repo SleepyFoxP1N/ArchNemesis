@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerState : MonoBehaviour
+public class PlayerStateHandler : MonoBehaviour
 {
-    private static PlayerState instance;
-    public static PlayerState Instance { get { return instance; } }
+    private static PlayerStateHandler instance;
+    public static PlayerStateHandler Instance { get { return instance; } }
     private void Awake() => instance = this;
 
     public enum PlayerStateEnum
