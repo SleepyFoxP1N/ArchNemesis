@@ -180,8 +180,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 159084578}
-  - component: {fileID: 159084577}
+  - component: {fileID: 159084581}
   - component: {fileID: 159084576}
+  - component: {fileID: 159084577}
   - component: {fileID: 159084579}
   - component: {fileID: 159084580}
   m_Layer: 0
@@ -204,7 +205,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementSpeed: {x: 5, y: 5}
-  rigidbody2D: {fileID: 159084579}
 --- !u!212 &159084577
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -267,7 +267,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.91, y: 3.09, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -344,6 +344,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &159084581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159084575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3335d1b1446a7334eb67c71b6a4b4f73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &280876334
 GameObject:
   m_ObjectHideFlags: 0
