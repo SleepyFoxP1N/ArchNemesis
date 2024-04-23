@@ -5,14 +5,14 @@ using UnityEngine.Playables;
 public class PlayerController : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] Vector2 MovementSpeed = new Vector2(100.0f, 100.0f);
+    [SerializeField] private Vector2 MovementSpeed = new Vector2(100.0f, 100.0f);
 
 
     // ===== ===== ===== ===== ===== COMPONENTS
     private new Rigidbody2D rigidbody2D;
 
 
-    public PlayerInputAction playerControls;
+    public PlayerInputActions playerControls;
     private InputAction movement;
     private InputAction shoot;
 
@@ -28,19 +28,19 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
-        playerControls = new PlayerInputAction();
-        PlayerStateHandler.Instance.CurrentState = PlayerStateHandler.PlayerStateEnum.Idle;
+        playerControls = new PlayerInputActions();
+        //PlayerStateHandler.Instance.CurrentState = PlayerStateHandler.PlayerStateEnum.Idle;
     }
 
     private void OnEnable()
     {
-        setUpPlayerControls();
-        enablePlayerControls();
-        shoot.performed += onShoot;
+        SetUpPlayerControls();
+        EnablePlayerControls();
+        shoot.performed += OnShoot;
     }
     private void OnDisable()
     {
-        disablePlayerControls();
+        DisablePlayerControls();
     }
 
     void Update()
@@ -56,23 +56,23 @@ public class PlayerController : MonoBehaviour
     //                          PERSONAL METHODS                            //
     // ———————————————————————————————————————————————————————————————————— //
 
-    private void setUpPlayerControls()
+    private void SetUpPlayerControls()
     {
         movement = playerControls.Player.Move;
         shoot = playerControls.Player.Fire;
     }
-    private void enablePlayerControls()
+    private void EnablePlayerControls()
     {
         movement.Enable();
         shoot.Enable();
     }
-    private void disablePlayerControls()
+    private void DisablePlayerControls()
     {
         movement.Disable();
         shoot.Disable();
     }
 
-    private void onShoot(InputAction.CallbackContext context)
+    private void OnShoot(InputAction.CallbackContext context)
     {
         Debug.Log(moveDirection);
     }
