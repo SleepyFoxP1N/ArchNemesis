@@ -9,8 +9,10 @@ public class Projectile : ScriptableObject
     [SerializeField] private new string name;
     [SerializeField] private string description;
     [SerializeField] private int damage;
+    [SerializeField] private GameObject projectile;
 
     public string Name { get => name; private set => name = value; }
     public string Description { get => description; private set => description = value; }
     public int Damage { get => damage; private set => damage = value; }
+
 }

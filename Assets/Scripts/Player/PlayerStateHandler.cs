@@ -16,7 +16,6 @@ public class PlayerStateHandler : MonoBehaviour
         Death
     }
 
-    // ===== ===== ===== ===== ===== Current player state
     private PlayerStateEnum currentState;
     public PlayerStateEnum CurrentState { get => currentState; set => currentState = value; }
 }

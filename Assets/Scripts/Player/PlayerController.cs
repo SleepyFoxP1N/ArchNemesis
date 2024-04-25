@@ -5,20 +5,28 @@ using UnityEngine.Playables;
 public class PlayerController : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private Vector2 MovementSpeed = new Vector2(100.0f, 100.0f);
+    [SerializeField] private float MovementSpeed = 5f;
 
 
-    // ===== ===== ===== ===== ===== COMPONENTS
+    [Header("Components")]
+    [SerializeField] private Camera main_Cam;
+    [SerializeField] private GameObject weapon_RP; // RotatePoint 
+    [SerializeField] private Weapon weapon_SO; //ScriptableObject
+    [SerializeField] private GameObject bullet;
     private new Rigidbody2D rigidbody2D;
 
 
-    public PlayerInputActions playerControls;
-    private InputAction movement;
-    private InputAction shoot;
+    [Header("Scripts")]
+    [SerializeField] private PlayerAim playerAim;
+    [SerializeField] private PlayerShoot playerShoot;
 
 
     // ===== ===== ===== ===== ===== VARIABLES DECLARATION
     private Vector2 moveDirection = new Vector2(0.0f, 0.0f);
+
+    public PlayerInputActions playerControls;
+    private InputAction movement;
+    private InputAction shoot;
 
 
     // ———————————————————————————————————————————————————————————————————— //
@@ -29,7 +37,7 @@ public class PlayerController : MonoBehaviour
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         playerControls = new PlayerInputActions();
-        //PlayerStateHandler.Instance.CurrentState = PlayerStateHandler.PlayerStateEnum.Idle;
+        PlayerStateHandler.Instance.CurrentState = PlayerStateHandler.PlayerStateEnum.Idle;
     }
 
     private void OnEnable()
@@ -45,7 +53,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        playerAim.OnAim(main_Cam, weapon_RP);
         moveDirection = movement.ReadValue<Vector2>();
+        moveDirection = new Vector2(moveDirection.x, moveDirection.y).normalized;
     }
     void FixedUpdate()
     {
@@ -75,5 +85,7 @@ public class PlayerController : MonoBehaviour
     private void OnShoot(InputAction.CallbackContext context)
     {
         Debug.Log(moveDirection);
+        playerShoot.OnShoot(main_Cam,gameObject, bullet); // TODO: Change gameObject to weapon
     }
+
 }
