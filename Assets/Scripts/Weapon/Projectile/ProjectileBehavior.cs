@@ -8,7 +8,7 @@ public class ProjectileBehavior : MonoBehaviour
     public Camera main_Cam;
     private Vector3 mouse_Pos;
     private Rigidbody2D rigidbody2d;
-    private float force = 5;
+    public float force = 5;
 
     private void Start()
     {

@@ -84,8 +84,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnShoot(InputAction.CallbackContext context)
     {
-        Debug.Log(moveDirection);
-        playerShoot.OnShoot(main_Cam,gameObject, bullet); // TODO: Change gameObject to weapon
+        playerShoot.OnShoot(main_Cam, gameObject, bullet); // TODO: Change gameObject to weapon
     }
 
 }

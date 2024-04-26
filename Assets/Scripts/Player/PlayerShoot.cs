@@ -1,15 +1,14 @@
 using UnityEngine;
+using Photon.Pun;
 
 public class PlayerShoot : MonoBehaviour
 {
-    private PlayerInputActions playerControls;
-
     private Transform projectile_Transform;
-    private bool canShoot = false;
+    public bool canShoot = false;
     private float timer;
-    private float timeBetweenFiring = 0.5f;
+    public float timeBetweenFiring = 0f;
 
-    private void Update()
+    public void Update()
     {
         if(!canShoot)
         {
@@ -28,7 +27,7 @@ public class PlayerShoot : MonoBehaviour
         if ( canShoot )
         {
             canShoot = false;
-            GameObject spawnProjectile = Instantiate(projectile, projectile_Transform.position, Quaternion.identity );
+            GameObject spawnProjectile = PhotonNetwork.Instantiate(projectile.name, projectile_Transform.position, Quaternion.identity );
             spawnProjectile.GetComponent<ProjectileBehavior>().main_Cam = main_Cam;
         }
     }
