@@ -7,14 +7,11 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class PlayerSetup : MonoBehaviour
 {
-
-
-    [SerializeField] PlayerController playerController;
+    [Header("GameObjects")]
     [SerializeField] GameObject mainCam;
     [SerializeField] GameObject virtualCam;
-    [SerializeField] TextMeshPro name_TextMesh;
-    [SerializeField] Transform TPweaponHolder;
-
+    [SerializeField] GameObject weaponHolder;
+    [SerializeField] GameObject nameTag;
 
 
     [Header("PLAYER INFO")]
@@ -23,22 +20,25 @@ public class PlayerSetup : MonoBehaviour
 
     public void IsLocalPlayer()
     {
-        TPweaponHolder.gameObject.SetActive(false);
-        playerController.enabled = true;
+        gameObject.GetComponent<Player>().enabled = true;
+        gameObject.GetComponent<PlayerController>().enabled = true;
+        gameObject.GetComponent<PlayerShoot>().enabled = true;
+
+        weaponHolder.SetActive(true);
         mainCam.SetActive(true);
         virtualCam.SetActive(true);
     }
 
-
     [PunRPC]
     public void SetTPWeapon(int _weaponIndex)
     {
-        foreach (Transform _weapon in TPweaponHolder)
+        Transform weaponHolder_T = weaponHolder.transform;
+        foreach (Transform _weapon in weaponHolder_T)
         {
             _weapon.gameObject.SetActive(false);
         }
 
-        TPweaponHolder.GetChild(_weaponIndex).gameObject.SetActive(true);
+        weaponHolder_T.GetChild(_weaponIndex).gameObject.SetActive(true);
     }
 
 
@@ -46,6 +46,6 @@ public class PlayerSetup : MonoBehaviour
     public void ChangeNickname(string _name)
     {
         nickname = _name;
-        //name_TextMesh.text = nickname;
+        nameTag.GetComponent<TextMeshPro>().text = nickname;
     }
 }

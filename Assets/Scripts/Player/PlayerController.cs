@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] private PlayerAim playerAim;
     [SerializeField] private PlayerShoot playerShoot;
+    [SerializeField] private PlayerStateHandler playerStateHandler;
 
 
     // ===== ===== ===== ===== ===== VARIABLES DECLARATION
@@ -37,7 +39,7 @@ public class PlayerController : MonoBehaviour
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         playerControls = new PlayerInputActions();
-        PlayerStateHandler.Instance.CurrentState = PlayerStateHandler.PlayerStateEnum.Idle;
+        playerStateHandler.CurrentState = PlayerStateHandler.PlayerStateEnum.Idle;
     }
 
     private void OnEnable()
@@ -84,7 +86,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnShoot(InputAction.CallbackContext context)
     {
-        playerShoot.OnShoot(main_Cam, gameObject, bullet); // TODO: Change gameObject to weapon
+        GetComponent<PhotonView>().RPC("OnShoot", RpcTarget.All);
     }
 
 }

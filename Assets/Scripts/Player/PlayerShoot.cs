@@ -3,13 +3,18 @@ using Photon.Pun;
 
 public class PlayerShoot : MonoBehaviour
 {
-    private Transform projectile_Transform;
+    private GameObject weapon;
+    private GameObject projectile;
+    [SerializeField] private WeaponHandler weaponHandler;
+
     public bool canShoot = false;
     private float timer;
     public float timeBetweenFiring = 0f;
 
     public void Update()
     {
+        weapon = weaponHandler.CurrentWeapon;
+        projectile = weaponHandler.CurrentProjectile;
         if(!canShoot)
         {
             timer += Time.deltaTime;
@@ -20,15 +25,14 @@ public class PlayerShoot : MonoBehaviour
             }
         }
     }
-
-    public void OnShoot(Camera main_Cam, GameObject weapon, GameObject projectile)
+    
+    [PunRPC]
+    public void OnShoot()
     {
-        projectile_Transform = weapon.transform;
         if ( canShoot )
         {
             canShoot = false;
-            GameObject spawnProjectile = PhotonNetwork.Instantiate(projectile.name, projectile_Transform.position, Quaternion.identity );
-            spawnProjectile.GetComponent<ProjectileBehavior>().main_Cam = main_Cam;
+            GameObject spawnProjectile = PhotonNetwork.Instantiate(projectile.name, weapon.transform.position, Quaternion.identity );
         }
     }
 }

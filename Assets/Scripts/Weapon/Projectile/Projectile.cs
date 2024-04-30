@@ -14,5 +14,4 @@ public class Projectile : ScriptableObject
     public string Name { get => name; private set => name = value; }
     public string Description { get => description; private set => description = value; }
     public int Damage { get => damage; private set => damage = value; }
-
 }

@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
     public bool isLocalPlayer;
 
 
-    [SerializeField] RectTransform healthBar;
+    [SerializeField] Transform healthBar;
     private float originalHealthBarSize;
 
 
@@ -19,19 +19,19 @@ public class Health : MonoBehaviour
 
     private void Start()
     {
-        //originalHealthBarSize = healthBar.sizeDelta.x;
+        originalHealthBarSize = healthBar.localScale.x;
     }
 
 
     [PunRPC]
     public void TakeDamage(int _damage)
     {
-        Debug.Log("GO_Name: " + gameObject.name + "LP: " + PhotonNetwork.LocalPlayer);
         health -= _damage;
-        //healthBar.sizeDelta = new Vector2(originalHealthBarSize * health / 100f, healthBar.sizeDelta.y);
+
+        healthBar.localScale = new Vector3(originalHealthBarSize * health / 100f, healthBar.localScale.y, healthBar.localScale.z);
         //healthText.text = health.ToString();
-        
-        if(health <= 0)
+
+        if (health <= 0)
         {
             if (isLocalPlayer)
             {
@@ -40,8 +40,8 @@ public class Health : MonoBehaviour
                 RoomManager.instance.deaths++;
                 RoomManager.instance.SetHashes();
             }
-                
-            Destroy(gameObject);    
+
+            PhotonView.Destroy(gameObject);
         }
     }
 }

@@ -1,13 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponHandler : MonoBehaviour
 {
-    private static WeaponHandler instance;
-    public static WeaponHandler Instance { get { return instance; } }
-    private void Awake() => instance = this;
-
     public enum WeaponHoldEnum
     {
         LightBow,
@@ -15,8 +12,13 @@ public class WeaponHandler : MonoBehaviour
         HeavyBow,
     }
 
-    private WeaponHoldEnum currentWeapon;
+    [SerializeField] private WeaponHoldEnum currentWeaponEnum;
 
-    public WeaponHoldEnum CurrentWeapon { get => currentWeapon; set => currentWeapon = value; }
+    [SerializeField] private GameObject currentWeapon;
 
+    [SerializeField] private GameObject currentProjectile;
+
+    public WeaponHoldEnum CurrentWeaponEnum { get => currentWeaponEnum; set => currentWeaponEnum = value; }
+    public GameObject CurrentWeapon { get => currentWeapon; set => currentWeapon = value; }
+    public GameObject CurrentProjectile { get => currentProjectile; set => currentProjectile = value; }
 }
