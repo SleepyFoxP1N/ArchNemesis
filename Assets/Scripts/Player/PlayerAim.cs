@@ -1,18 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
+using Photon.Pun;
 
 public class PlayerAim : MonoBehaviour
 {
     private Vector3 mousePosition;
+    private PhotonView photonView;
+    [SerializeField] private Camera cam;
+    [SerializeField] private GameObject weaponRotatePoint;
+    [SerializeField] private Animator animator;
+    public bool isLocalPlayer;
+    private float rotZ;
 
-    public void OnAim(Camera main_Camera, GameObject weapon_RP)
+    private void Start()
     {
-        mousePosition = main_Camera.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 rotation = mousePosition - transform.position;
-        float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
-        weapon_RP.transform.rotation = Quaternion.Euler(0, 0, rotZ);
+        photonView = GetComponent<PhotonView>(); 
+    }
+    public void OnAim()
+    {
+        if (photonView.IsMine && isLocalPlayer)
+        {
+            mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 rotation = mousePosition - transform.position;
+            rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
+            weaponRotatePoint.transform.rotation = Quaternion.Euler(0, 0, rotZ);
+        }
+    }
+
+    private void Update()
+    {
+        animator.SetFloat("MouseAngle", rotZ);
     }
 
     // TODO: CHARACTER AND WEAPON DIRECTION FACING

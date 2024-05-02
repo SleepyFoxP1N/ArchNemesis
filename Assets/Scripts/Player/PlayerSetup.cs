@@ -20,6 +20,7 @@ public class PlayerSetup : MonoBehaviour
 
     public void IsLocalPlayer()
     {
+        gameObject.GetComponent<PlayerAim>().enabled = true;
         gameObject.GetComponent<Player>().enabled = true;
         gameObject.GetComponent<PlayerController>().enabled = true;
         gameObject.GetComponent<PlayerShoot>().enabled = true;

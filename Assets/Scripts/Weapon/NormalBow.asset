@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 210c86121d358aa4484484b470f5dc44, type: 3}
+  m_Name: NormalBow
+  m_EditorClassIdentifier: 
+  name: Bowgun
+  description: "Normal Weapon (Normal Bow / Bowgun)\r\n\r\n  [] Average Damage\r\n\r\n 
+    [] Average Attack Speed\r\n\r\n  [] Average Movement\r\n\r\n  [] Average Reload"
+  damage: 20
+  force: 10
+  timeBetweenFiring: 0
+  probabilitySpawning: 0.35
+  weaponSprite: {fileID: 21300000, guid: 5be1caa6602f4f54892eb152eefe1022, type: 3}

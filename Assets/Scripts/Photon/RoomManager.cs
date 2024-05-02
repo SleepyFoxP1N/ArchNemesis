@@ -8,18 +8,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
 {
     public static RoomManager instance;
 
-
     [Space]
     [SerializeField] GameObject Player_OBJ;
-
-
-    [Space]
     [SerializeField] Transform[] spawnPoints;
-
-
-    [Space]
     [SerializeField] GameObject roomCamera;
-
 
     [Header("UI")]
     [SerializeField] GameObject name_UI;
@@ -49,26 +41,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
         instance = this;
     }
 
-
-    /*public override void OnConnectedToMaster()
-    {
-        base.OnConnectedToMaster();
-
-        Debug.Log("Connected to server");
-        // Joined default lobby
-        PhotonNetwork.JoinLobby();
-    }
-
-    public override void OnJoinedLobby()
-    {
-        base.OnJoinedLobby();
-
-        Debug.Log("Joined new Lobby");
-
-        PhotonNetwork.JoinOrCreateRoom(roomNameToJoin, null, null);
-    }*/
-
-
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();
@@ -88,6 +60,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
         player.GetComponent<PlayerSetup>().IsLocalPlayer();
         player.GetComponent<Health>().isLocalPlayer = true;
+        player.GetComponent<PlayerAim>().isLocalPlayer = true;
         player.GetComponent<PhotonView>().RPC("ChangeNickname", RpcTarget.AllBuffered, nickname);
 
         //setWeapon(player, "arms@ak 1", 1);

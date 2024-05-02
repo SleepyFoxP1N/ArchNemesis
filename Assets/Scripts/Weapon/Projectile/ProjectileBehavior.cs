@@ -5,18 +5,23 @@ using UnityEngine;
 
 public class ProjectileBehavior : MonoBehaviour
 {
+    public bool IsLocalBullet;
+    public Weapon weapon;
     private GameObject[] mainCameras;
     private Camera activeMainCamera;
     private Rigidbody2D rb;
 
-    [SerializeField] private int damage = 10;
-    [SerializeField] private float force = 5;
+    private int damage;
+    private float force;
 
     private void Awake()
     {
+        damage = weapon.Damage;
+        force = weapon.Force;
         InitializeComponents();
         SetInitialVelocity();
     }
+
 
     private void InitializeComponents()
     {
@@ -63,7 +68,7 @@ public class ProjectileBehavior : MonoBehaviour
         rb.velocity = direction * force;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle + 90);
+        transform.rotation = Quaternion.Euler(0, 0, angle - 90);
     }
 
 
@@ -77,7 +82,7 @@ public class ProjectileBehavior : MonoBehaviour
             return; 
         }
 
-        if (!health.isLocalPlayer)
+        if (!health.isLocalPlayer && IsLocalBullet)
         {
             ApplyDamage(other.gameObject, health);
             PhotonView.Destroy(gameObject);

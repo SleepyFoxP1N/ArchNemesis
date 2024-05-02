@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 210c86121d358aa4484484b470f5dc44, type: 3}
   m_Name: HeavyBow
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  damage: 0
-  itemPrefab: {fileID: 0}
-  projectilePrefab: {fileID: 0}
+  name: Ballista
+  description: "Heavy Weapon (Heavy Bowgun / Ballista)\r\n\r\n  [] Max Damage\r\n\r\n 
+    [] Max Attack Speed\r\n\r\n  [] Slow Movement\r\n\r\n  [] Slow Reload"
+  damage: 100
+  force: 100
+  timeBetweenFiring: 2
+  probabilitySpawning: 0.25
+  weaponSprite: {fileID: 21300000, guid: e746a2cca11da894d931da1c8f6b53df, type: 3}

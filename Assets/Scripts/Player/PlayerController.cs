@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject weapon_RP; // RotatePoint 
     [SerializeField] private Weapon weapon_SO; //ScriptableObject
     [SerializeField] private GameObject bullet;
-    private new Rigidbody2D rigidbody2D;
+    [SerializeField] private Animator animator;
+    private Rigidbody2D rigidbody2D;
 
 
     [Header("Scripts")]
@@ -55,13 +56,14 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        playerAim.OnAim(main_Cam, weapon_RP);
         moveDirection = movement.ReadValue<Vector2>();
         moveDirection = new Vector2(moveDirection.x, moveDirection.y).normalized;
     }
     void FixedUpdate()
     {
+        playerAim.OnAim();
         rigidbody2D.MovePosition(rigidbody2D.position + (moveDirection * MovementSpeed * Time.fixedDeltaTime));
+        OnAnimate();
     }
 
     // ———————————————————————————————————————————————————————————————————— //
@@ -89,4 +91,11 @@ public class PlayerController : MonoBehaviour
         GetComponent<PhotonView>().RPC("OnShoot", RpcTarget.All);
     }
 
+    private void OnAnimate()
+    {
+        if (Mathf.Abs(moveDirection.x) > 0.1 || Mathf.Abs(moveDirection.y) > 0.1)
+            animator.SetBool("IsPlayerMoving", true);
+        else
+            animator.SetBool("IsPlayerMoving", false);
+    }
 }

@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 210c86121d358aa4484484b470f5dc44, type: 3}
   m_Name: LightBow
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  damage: 0
-  itemPrefab: {fileID: 0}
-  projectilePrefab: {fileID: 0}
+  name: Slingshot
+  description: "\u2022 Light weapon (Lightbow / Slingshot)\r\n\r\n  **[] Low Damage**\r\n\r\n 
+    **[] Fast Attack Speed**\r\n\r\n  **[] Fast Movement**\r\n\r\n   **[] Fast Reload**"
+  damage: 5
+  force: 25
+  timeBetweenFiring: 0
+  probabilitySpawning: 0.45
+  weaponSprite: {fileID: 21300000, guid: 831abdf940451034381964eb128faaf2, type: 3}

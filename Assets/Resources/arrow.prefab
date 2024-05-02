@@ -102,8 +102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b915ff86a71dee841aea38f2546b0186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  force: 5
+  IsLocalBullet: 0
+  weapon: {fileID: 11400000, guid: 4963f58812fc3c6459e5bc3af7ca60d9, type: 2}
 --- !u!50 &-7942125299788459648
 Rigidbody2D:
   serializedVersion: 4
