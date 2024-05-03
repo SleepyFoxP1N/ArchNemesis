@@ -142,7 +142,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5915569953618653785}
   - component: {fileID: 5968356884129940714}
-  - component: {fileID: 8342486667060553847}
   - component: {fileID: 1291402105338812508}
   m_Layer: 0
   m_Name: Main Camera
@@ -218,14 +217,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &8342486667060553847
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3463394802553672372}
-  m_Enabled: 1
 --- !u!114 &1291402105338812508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -846,12 +837,13 @@ GameObject:
   - component: {fileID: 3246489917008790487}
   - component: {fileID: 2978210778761827580}
   - component: {fileID: 5571967103513347081}
-  - component: {fileID: 3286529440809982246}
   - component: {fileID: 5044593027181042020}
   - component: {fileID: 5711614290339008818}
   - component: {fileID: 8077073179360326876}
   - component: {fileID: 1588262793905732833}
   - component: {fileID: 4313566025285308920}
+  - component: {fileID: 5642280057668876222}
+  - component: {fileID: 201721079998651118}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -868,7 +860,7 @@ Transform:
   m_GameObject: {fileID: 5957886883461543181}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.3875766, y: 2.690565, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1069,51 +1061,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &3286529440809982246
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5957886883461543181}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0023868084, y: 0.002386883}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.24, y: 0.32}
-    newSize: {x: 0.24, y: 0.32}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 1
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.20279264, y: 0.35555097}
-  m_EdgeRadius: 0
 --- !u!95 &5044593027181042020
 Animator:
   serializedVersion: 5
@@ -1216,6 +1163,49 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+--- !u!81 &5642280057668876222
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5957886883461543181}
+  m_Enabled: 1
+--- !u!58 &201721079998651118
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5957886883461543181}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.1090882}
+  serializedVersion: 2
+  m_Radius: 0.0509118
 --- !u!1 &6966743084806089237
 GameObject:
   m_ObjectHideFlags: 0
@@ -1625,6 +1615,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1245547717055280003}
     m_Modifications:
+    - target: {fileID: -4323560488438529856, guid: 33142eefb26a1dd4eb51bccdd3a14e4a, type: 3}
+      propertyPath: sceneViewId
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4323560488438529856, guid: 33142eefb26a1dd4eb51bccdd3a14e4a, type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2696910211623583656, guid: 33142eefb26a1dd4eb51bccdd3a14e4a, type: 3}
       propertyPath: m_Name
       value: Weapon

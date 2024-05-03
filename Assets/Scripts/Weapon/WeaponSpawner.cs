@@ -4,29 +4,29 @@ using UnityEngine;
 
 public class WeaponSpawner : MonoBehaviour
 {
+    [SerializeField] float spawnTime = 10;
     [SerializeField] private Transform[] spawnPoints;
 
-    private void Start()
-    {
-        StartCoroutine(SpawnWeapons());
-    }
 
-    private IEnumerator SpawnWeapons()
+    public IEnumerator SpawnWeapons()
     {
         while (true)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(spawnTime);
 
             ShuffleSpawnPoints();
 
             Transform emptySpawnPoint = GetEmptySpawnPoint();
-            if (emptySpawnPoint != null)
-            {
-                GameObject weapon = PhotonNetwork.Instantiate("Weapon", emptySpawnPoint.position, Quaternion.identity);
-                weapon.transform.SetParent(emptySpawnPoint);
-                Debug.Log("Weapon Spawned at " + emptySpawnPoint.gameObject.name);
-            }
+            if (emptySpawnPoint != null) SetUpSpawning(emptySpawnPoint);
         }
+    }
+
+    private void SetUpSpawning(Transform emptySpawnPoint)
+    {
+        GameObject weapon = PhotonNetwork.Instantiate("Weapon", (emptySpawnPoint.position + new Vector3(0f, 0.5f, -1f)), Quaternion.identity);
+        weapon.transform.SetParent(emptySpawnPoint);
+        emptySpawnPoint.transform.Find("circleVFX").gameObject.SetActive(true);
+        emptySpawnPoint.transform.Find("Collider").gameObject.SetActive(true);
     }
 
     private void ShuffleSpawnPoints()
@@ -45,7 +45,7 @@ public class WeaponSpawner : MonoBehaviour
     {
         foreach (Transform spawnPoint in spawnPoints)
         {
-            if (spawnPoint.childCount == 1)
+            if (spawnPoint.childCount == 3)
             {
                 return spawnPoint; 
             }

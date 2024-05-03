@@ -20,6 +20,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     [Header("MANAGERS")]
     [SerializeField] ManageSFX ManageSFX_SCRIPT;
+    [SerializeField] WeaponSpawner weaponSpawner;
 
 
     // ===== ===== ===== ===== ===== ROOM VARIABLE
@@ -45,9 +46,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         base.OnJoinedRoom();
 
-        Debug.Log("Fired when client is joined");
         roomCamera.SetActive(false);
-
+        StartCoroutine(weaponSpawner.SpawnWeapons());
         SpawnPlayer();
     }
 

@@ -16,6 +16,8 @@ MonoBehaviour:
   description: "Heavy Weapon (Heavy Bowgun / Ballista)\r\n\r\n  [] Max Damage\r\n\r\n 
     [] Max Attack Speed\r\n\r\n  [] Slow Movement\r\n\r\n  [] Slow Reload"
   damage: 100
+  arrow: 5
+  arrowBag: 1
   force: 100
   timeBetweenFiring: 2
   probabilitySpawning: 0.25

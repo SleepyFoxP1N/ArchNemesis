@@ -16,6 +16,8 @@ MonoBehaviour:
   description: "Normal Weapon (Normal Bow / Bowgun)\r\n\r\n  [] Average Damage\r\n\r\n 
     [] Average Attack Speed\r\n\r\n  [] Average Movement\r\n\r\n  [] Average Reload"
   damage: 20
+  arrow: 12
+  arrowBag: 5
   force: 10
   timeBetweenFiring: 0
   probabilitySpawning: 0.35
