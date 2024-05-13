@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class ButtonFadeInFadeOut : MonoBehaviour
 {
+    [SerializeField] string GoToScene;
     public GameObject ToActivate;
     public GameObject ToDeactivate;
 
@@ -30,10 +32,17 @@ public class ButtonFadeInFadeOut : MonoBehaviour
     {
         // Wait for 2 seconds
         yield return new WaitForSeconds(2f);
+        if( ToActivate != null ) {
+            ToActivate.SetActive(true);
+        }
+        else
+        {
+            SceneManager.LoadScene(GoToScene);
+        }
 
-        ToActivate.SetActive(true);
-
-
-        ToDeactivate.SetActive(false);
+        if (ToDeactivate != null)
+        {
+            ToDeactivate.SetActive(false);
+        }
     }
 }

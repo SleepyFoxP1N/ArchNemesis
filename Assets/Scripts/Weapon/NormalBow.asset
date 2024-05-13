@@ -12,13 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 210c86121d358aa4484484b470f5dc44, type: 3}
   m_Name: NormalBow
   m_EditorClassIdentifier: 
-  name: Bowgun
-  description: "Normal Weapon (Normal Bow / Bowgun)\r\n\r\n  [] Average Damage\r\n\r\n 
-    [] Average Attack Speed\r\n\r\n  [] Average Movement\r\n\r\n  [] Average Reload"
-  damage: 20
+  name: Bow
+  description: "Normal Weapon (Normal Bow)\r\n\r\n  [] Average Damage\r\n\r\n  []
+    Average Attack Speed\r\n\r\n  [] Average Movement\r\n\r\n  [] Average Reload"
+  damage: 25
   arrow: 12
-  arrowBag: 5
-  force: 10
-  timeBetweenFiring: 0
+  arrowBag: 7
+  force: 20
+  timeBetweenFiring: 0.3
   probabilitySpawning: 0.35
-  weaponSprite: {fileID: 21300000, guid: 5be1caa6602f4f54892eb152eefe1022, type: 3}
+  weaponSprite: {fileID: 737310223, guid: 98f1c289fb71dc04b9c051b0a72dded8, type: 3}
+  projectleSprite: {fileID: -1828548315, guid: 1feabd9acedd42245a5214d7d1d9b6f2, type: 3}
+  spriteColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  spriteScale: {x: 1.5, y: 1.5}
+  impactVFX: {fileID: 2965222256817593503, guid: a164e676dbbd6e54587237e619372c98, type: 3}

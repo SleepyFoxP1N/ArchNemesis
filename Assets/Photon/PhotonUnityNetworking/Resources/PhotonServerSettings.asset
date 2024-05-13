@@ -47,6 +47,22 @@ MonoBehaviour:
   - OnShoot
   - SetPlayerToAll
   - SpawnWeapons
+  - FlipObject
+  - OnTouchWeaponSpawner
+  - SetUpSpawning
+  - SetUpWeaponSpawning
+  - SetUpWeaponSpawn
+  - RandomizeThisWeapon
+  - SetUpWeapon
+  - UpdateSprite
+  - ReloadWeapon
+  - playSoundAllUser
+  - spawnWeapon
+  - UpdateWeaponRPC
+  - SyncTimer
+  - InitializeScript
+  - SetUp
+  - SetUpProjectile
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

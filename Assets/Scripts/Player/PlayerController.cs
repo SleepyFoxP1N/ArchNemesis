@@ -1,7 +1,7 @@
 using Photon.Pun;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Playables;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,10 +12,9 @@ public class PlayerController : MonoBehaviour
     [Header("Components")]
     [SerializeField] private Camera main_Cam;
     [SerializeField] private GameObject weapon_RP; // RotatePoint 
-    [SerializeField] private Weapon weapon_SO; //ScriptableObject
-    [SerializeField] private GameObject bullet;
     [SerializeField] private Animator animator;
-    private Rigidbody2D rigidbody2D;
+    [SerializeField] private AudioSource playerAud;
+    private Rigidbody2D rb;
 
 
     [Header("Scripts")]
@@ -32,13 +31,20 @@ public class PlayerController : MonoBehaviour
     private InputAction shoot;
 
 
+    // ===== ===== ===== ===== ===== EVENTS
+    public event Action<bool> onWalk;
+    public event Action<int> onWeaponShoot;
+    public event Action<int, int> onWeaponReload; // (arrow, arrowbag)
+
+
+
     // ———————————————————————————————————————————————————————————————————— //
     //                            UNITY METHODS                             //
     // ———————————————————————————————————————————————————————————————————— //
 
     private void Awake()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         playerControls = new PlayerInputActions();
         playerStateHandler.CurrentState = PlayerStateHandler.PlayerStateEnum.Idle;
     }
@@ -48,6 +54,9 @@ public class PlayerController : MonoBehaviour
         SetUpPlayerControls();
         EnablePlayerControls();
         shoot.performed += OnShoot;
+
+        playerShoot.OnReloadEvent = onWeaponReload;
+        playerShoot.OnShootEvent = onWeaponShoot;
     }
     private void OnDisable()
     {
@@ -58,11 +67,12 @@ public class PlayerController : MonoBehaviour
     {
         moveDirection = movement.ReadValue<Vector2>();
         moveDirection = new Vector2(moveDirection.x, moveDirection.y).normalized;
+
+        OnReload();
     }
     void FixedUpdate()
     {
-        playerAim.OnAim();
-        rigidbody2D.MovePosition(rigidbody2D.position + (moveDirection * MovementSpeed * Time.fixedDeltaTime));
+        rb.MovePosition(rb.position + (moveDirection * MovementSpeed * Time.fixedDeltaTime));
         OnAnimate();
     }
 
@@ -91,11 +101,41 @@ public class PlayerController : MonoBehaviour
         GetComponent<PhotonView>().RPC("OnShoot", RpcTarget.All);
     }
 
+    private void OnReload()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            GetComponent<PhotonView>().RPC("ReloadWeapon", RpcTarget.All);
+        }
+    }
+
     private void OnAnimate()
     {
         if (Mathf.Abs(moveDirection.x) > 0.1 || Mathf.Abs(moveDirection.y) > 0.1)
+        {
             animator.SetBool("IsPlayerMoving", true);
+            onWalk?.Invoke(true);
+        }
         else
+        {
             animator.SetBool("IsPlayerMoving", false);
+            onWalk?.Invoke(false);
+        }
+    }
+
+    private AudioClip thisWalkClip;
+    public void playSound(AudioClip _Clip)
+    {
+        thisWalkClip = _Clip;
+        if (!playerAud.isPlaying)
+        {
+            GetComponent<PhotonView>().RPC("playSoundAllUser", RpcTarget.All);
+        }
+    }
+
+    [PunRPC]
+    private void playSoundAllUser()
+    {
+        playerAud.PlayOneShot(thisWalkClip);
     }
 }

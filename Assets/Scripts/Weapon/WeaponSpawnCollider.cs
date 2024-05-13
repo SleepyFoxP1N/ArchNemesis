@@ -3,36 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Unity.VisualScripting;
+using System;
 
 public class WeaponSpawnCollider : MonoBehaviour
 {
-    private GameObject circleVFX;
-    private GameObject playerWeapon;
-    private GameObject weaponSpawned;
+    public GameObject WeaponSpawned; // Initialized in weaponSpawner
+    public GameObject circleVFX;
+    private Weapon weaponObj;
 
-    private void Start()
+    [PunRPC]
+    private void OnTouchWeaponSpawner(int playerId)
     {
-        circleVFX = gameObject.transform.parent.Find("circleVFX").gameObject;
-    }
-
-    private void OnTouch(Collider2D other)
-    {
-        playerWeapon = other.transform.Find("Weapon Holder/Rotate Point/Weapon").gameObject;
+        GameObject player = PhotonView.Find(playerId).gameObject;
+        GameObject playerWeapon = player.transform.Find("Weapon Holder/Rotate Point/Weapon").gameObject;
+        GameObject weaponUI = player.transform.Find("Main Camera/Canvas/WeaponUI").gameObject;
 
         if (playerWeapon == null) return;
 
-        weaponSpawned = gameObject.transform.parent.Find("Weapon(Clone)").gameObject;
+        weaponObj = WeaponSpawned.GetComponent<WeaponBehavior>().CurrentWeapon_Obj;
 
-        playerWeapon.GetComponent<WeaponBehavior>().currentWeapon_Obj = weaponSpawned.GetComponent<WeaponBehavior>().currentWeapon_Obj;
-        playerWeapon.GetComponent<WeaponBehavior>().UpdateSprite();
+        playerWeapon.GetComponent<WeaponBehavior>().CurrentWeapon_Obj = weaponObj;
+        player.GetComponent<PlayerShoot>().SetUp(weaponObj);
+        weaponUI.GetComponent<WeaponUI>().InitializeScript(weaponObj);
+
+        playerWeapon.GetComponent<PhotonView>().RPC("UpdateWeaponRPC", RpcTarget.AllBuffered, Array.IndexOf(playerWeapon.GetComponent<WeaponBehavior>().weapons, weaponObj));
+        
         circleVFX.SetActive(false);
-        PhotonNetwork.Destroy(weaponSpawned);
         gameObject.SetActive(false);
+
+        if (GetComponent<PhotonView>().IsMine)
+        {
+            PhotonNetwork.Destroy(WeaponSpawned);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        OnTouch(other);
+        if (other.gameObject.GetComponent<Player>() != null && WeaponSpawned != null)
+        {
+            GetComponent<PhotonView>().RPC("OnTouchWeaponSpawner", RpcTarget.AllBuffered, other.gameObject.GetPhotonView().ViewID);
+        }
     }
 
 }

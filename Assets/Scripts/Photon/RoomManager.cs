@@ -12,6 +12,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [SerializeField] GameObject Player_OBJ;
     [SerializeField] Transform[] spawnPoints;
     [SerializeField] GameObject roomCamera;
+    [SerializeField] string hostPlayerID;
 
     [Header("UI")]
     [SerializeField] GameObject name_UI;
@@ -19,13 +20,14 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
 
     [Header("MANAGERS")]
-    [SerializeField] ManageSFX ManageSFX_SCRIPT;
+    [SerializeField] ManagerSFX managerSFX;
     [SerializeField] WeaponSpawner weaponSpawner;
+    [SerializeField] TimerUI timerUI;
 
 
     // ===== ===== ===== ===== ===== ROOM VARIABLE
     [HideInInspector]
-    public string roomNameToJoin = "test";
+    public string roomNameToJoin = "Room";
 
 
 
@@ -47,33 +49,43 @@ public class RoomManager : MonoBehaviourPunCallbacks
         base.OnJoinedRoom();
 
         roomCamera.SetActive(false);
-        StartCoroutine(weaponSpawner.SpawnWeapons());
-        SpawnPlayer();
+        GameObject player = SpawnPlayer();
+        SetHostPlayer(player);
+    }
+
+    private void SetHostPlayer(GameObject player)
+    {
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+        {
+            hostPlayerID = PhotonNetwork.LocalPlayer.UserId;
+        }
+        if (PhotonNetwork.IsMasterClient && hostPlayerID == PhotonNetwork.LocalPlayer.UserId)
+        {
+            StartCoroutine(weaponSpawner.SpawnWeapons());
+            StartCoroutine(timerUI.timer(player));
+        }
     }
 
 
-    public void SpawnPlayer() 
+    public GameObject SpawnPlayer() 
     { 
         Transform spawnPoint = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
 
         GameObject player = PhotonNetwork.Instantiate(Player_OBJ.name, spawnPoint.position, Quaternion.identity);
-
+        
+        setWeaponSFX(player);
         player.GetComponent<PlayerSetup>().IsLocalPlayer();
         player.GetComponent<Health>().isLocalPlayer = true;
         player.GetComponent<PlayerAim>().isLocalPlayer = true;
         player.GetComponent<PhotonView>().RPC("ChangeNickname", RpcTarget.AllBuffered, nickname);
 
-        //setWeapon(player, "arms@ak 1", 1);
-        //setWeapon(player, "arms@ak 2", 2);
-
         PhotonNetwork.LocalPlayer.NickName = nickname;
+        return player;
     }
 
-    public void setWeapon(GameObject player, string name, int num)
+    private void setWeaponSFX(GameObject player)
     {
-        Weapon weapon = player.transform.Find("Eye Camera/Weapon Camera/Weapon Holder/"+ name).GetComponent<Weapon>();
-        ManageSFX_SCRIPT.setWeaponSFX(weapon);
-        //weapon.setSFX_RPC(ManageSFX_SCRIPT); <--- TODO:
+        managerSFX.SetWeaponSFX(player.GetComponent<PlayerController>(), player.transform.Find("Weapon Holder/Rotate Point/Weapon").GetComponent<WeaponBehavior>());
     }
 
 
@@ -87,12 +99,18 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("Connecting...");
 
-        
+        if (!PhotonNetwork.IsConnectedAndReady)
+        {
+            Debug.LogError("Not connected to the Master Server.");
+            return;
+        }
+
         PhotonNetwork.JoinOrCreateRoom(roomNameToJoin, null, null);
 
         name_UI.SetActive(false);
         connecting_UI.SetActive(true);
     }
+
 
 
     public void SetHashes()

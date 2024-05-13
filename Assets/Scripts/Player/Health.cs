@@ -11,8 +11,9 @@ public class Health : MonoBehaviour
     [SerializeField] Transform healthBar;
     private float originalHealthBarSize;
 
-
     [Header("UI")]
+    [SerializeField] Transform healthBarUI;
+    private float originalHealthBarUISize;
     [SerializeField] TextMeshProUGUI healthText;
 
 
@@ -20,6 +21,7 @@ public class Health : MonoBehaviour
     private void Start()
     {
         originalHealthBarSize = healthBar.localScale.x;
+        originalHealthBarUISize = healthBar.localScale.x;
     }
 
 
@@ -29,7 +31,9 @@ public class Health : MonoBehaviour
         health -= _damage;
 
         healthBar.localScale = new Vector3(originalHealthBarSize * health / 100f, healthBar.localScale.y, healthBar.localScale.z);
-        //healthText.text = health.ToString();
+
+        healthBarUI.localScale = new Vector3(originalHealthBarUISize * health / 100f, healthBarUI.localScale.y, healthBarUI.localScale.z);
+        healthText.text = "HP:"+health.ToString();
 
         if (health <= 0)
         {

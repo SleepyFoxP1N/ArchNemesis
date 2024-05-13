@@ -1,6 +1,7 @@
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Pun.UtilityScripts;
+using System;
 using UnityEngine;
 
 public class ProjectileBehavior : MonoBehaviour
@@ -18,10 +19,17 @@ public class ProjectileBehavior : MonoBehaviour
     {
         damage = weapon.Damage;
         force = weapon.Force;
+        SetUpProjectile();
         InitializeComponents();
         SetInitialVelocity();
     }
 
+    private void SetUpProjectile()
+    {
+        GetComponent<SpriteRenderer>().sprite = weapon.ProjectleSprite;
+        GetComponent<SpriteRenderer>().color = weapon.SpriteColor;
+        gameObject.transform.localScale = weapon.SpriteScale * 3;
+    }
 
     private void InitializeComponents()
     {
@@ -68,7 +76,7 @@ public class ProjectileBehavior : MonoBehaviour
         rb.velocity = direction * force;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle - 90);
+        transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
 
@@ -78,16 +86,27 @@ public class ProjectileBehavior : MonoBehaviour
 
         if (health == null)
         {
-            PhotonView.Destroy(gameObject);
-            return; 
+            PhotonNetwork.Instantiate(weapon.ImpactVFX.name, transform.position, Quaternion.identity);
+            DestroyProjectile();
+            return;
         }
 
         if (!health.isLocalPlayer && IsLocalBullet)
         {
+            PhotonNetwork.Instantiate(weapon.ImpactVFX.name, transform.position, Quaternion.identity);
             ApplyDamage(other.gameObject, health);
-            PhotonView.Destroy(gameObject);
+            DestroyProjectile();
         }
     }
+
+    private void DestroyProjectile()
+    {
+        if (GetComponent<PhotonView>().IsMine)
+        {
+            PhotonNetwork.Destroy(gameObject);
+        }
+    }
+
 
     private void ApplyDamage(GameObject otherGameObject, Health health)
     {

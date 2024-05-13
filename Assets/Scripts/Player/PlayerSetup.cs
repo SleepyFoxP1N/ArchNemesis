@@ -11,6 +11,7 @@ public class PlayerSetup : MonoBehaviour
     [SerializeField] GameObject mainCam;
     [SerializeField] GameObject virtualCam;
     [SerializeField] GameObject weaponHolder;
+    [SerializeField] GameObject weapon;
     [SerializeField] GameObject nameTag;
 
 
@@ -24,8 +25,9 @@ public class PlayerSetup : MonoBehaviour
         gameObject.GetComponent<Player>().enabled = true;
         gameObject.GetComponent<PlayerController>().enabled = true;
         gameObject.GetComponent<PlayerShoot>().enabled = true;
+        gameObject.AddComponent<AudioListener>();
 
-        weaponHolder.SetActive(true);
+        weapon.GetComponent<WeaponBehavior>().enabled = true;
         mainCam.SetActive(true);
         virtualCam.SetActive(true);
     }

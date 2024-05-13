@@ -12,13 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 210c86121d358aa4484484b470f5dc44, type: 3}
   m_Name: LightBow
   m_EditorClassIdentifier: 
-  name: Slingshot
-  description: "\u2022 Light weapon (Lightbow / Slingshot)\r\n\r\n  [] Low Damage\n\r\n 
+  name: MiniElven
+  description: "\u2022 Light weapon (Lightbow / Elven)\r\n\r\n  [] Low Damage\n\r\n 
     [] Fast Attack Speed\r\n\r\n  [] Fast Movement\r\n\r\n  [] Fast Reload"
   damage: 5
   arrow: 30
   arrowBag: 3
-  force: 25
-  timeBetweenFiring: 0
-  probabilitySpawning: 0.45
-  weaponSprite: {fileID: 21300000, guid: 831abdf940451034381964eb128faaf2, type: 3}
+  force: 45
+  timeBetweenFiring: 0.05
+  probabilitySpawning: 0.5
+  weaponSprite: {fileID: 737310223, guid: 98f1c289fb71dc04b9c051b0a72dded8, type: 3}
+  projectleSprite: {fileID: -1828548315, guid: 1feabd9acedd42245a5214d7d1d9b6f2, type: 3}
+  spriteColor:
+    serializedVersion: 2
+    rgba: 4278214161
+  spriteScale: {x: 1.5, y: 0.75}
+  impactVFX: {fileID: 1758473627833946668, guid: 9b21333b068a5084ba09535839bee3c8, type: 3}
