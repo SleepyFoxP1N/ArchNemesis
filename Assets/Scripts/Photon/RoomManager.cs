@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
+using Photon.Realtime;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
@@ -48,6 +49,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         base.OnJoinedRoom();
 
+        StartCoroutine(OnWait());
+
         roomCamera.SetActive(false);
         GameObject player = SpawnPlayer();
         SetHostPlayer(player);
@@ -62,7 +65,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient && hostPlayerID == PhotonNetwork.LocalPlayer.UserId)
         {
             StartCoroutine(weaponSpawner.SpawnWeapons());
-            StartCoroutine(timerUI.timer(player));
         }
     }
 
@@ -78,6 +80,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         player.GetComponent<Health>().isLocalPlayer = true;
         player.GetComponent<PlayerAim>().isLocalPlayer = true;
         player.GetComponent<PhotonView>().RPC("ChangeNickname", RpcTarget.AllBuffered, nickname);
+        StartCoroutine(timerUI.timer(player));
 
         PhotonNetwork.LocalPlayer.NickName = nickname;
         return player;
@@ -99,16 +102,21 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("Connecting...");
 
-        if (!PhotonNetwork.IsConnectedAndReady)
+        if (PhotonNetwork.IsConnectedAndReady && !PhotonNetwork.InLobby)
         {
-            Debug.LogError("Not connected to the Master Server.");
+            Debug.Log("Not connected to the Master Server.");
             return;
         }
 
-        PhotonNetwork.JoinOrCreateRoom(roomNameToJoin, null, null);
 
+        PhotonNetwork.JoinOrCreateRoom(roomNameToJoin, new RoomOptions(), TypedLobby.Default);
         name_UI.SetActive(false);
         connecting_UI.SetActive(true);
+    }
+
+    private IEnumerator OnWait()
+    {
+        yield return new WaitForSecondsRealtime(3);
     }
 
 

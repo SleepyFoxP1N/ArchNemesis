@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsLocalBullet: 0
-  weapon: {fileID: 11400000, guid: 7fa7dbd40bdee2c41be0cc90eacda81e, type: 2}
+  weapon: {fileID: 11400000, guid: 4963f58812fc3c6459e5bc3af7ca60d9, type: 2}
 --- !u!50 &-7942125299788459648
 Rigidbody2D:
   serializedVersion: 4

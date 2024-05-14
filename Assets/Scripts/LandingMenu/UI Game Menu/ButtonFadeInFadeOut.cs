@@ -18,8 +18,12 @@ public class ButtonFadeInFadeOut : MonoBehaviour
 
     void PlayAnimation()
     {
-        // Play Button SFX
-        AudioManager.Instance.PlaySFX("Main Menu Button Click");
+        if(GoToScene == null)
+        {
+            // Play Button SFX
+            AudioManager.Instance.PlaySFX("Main Menu Button Click");
+        }
+
 
         // Start a coroutine to wait for 2 seconds before activating/deactivating GameObjects
         StartCoroutine(ActivateDeactivateAfterDelay());

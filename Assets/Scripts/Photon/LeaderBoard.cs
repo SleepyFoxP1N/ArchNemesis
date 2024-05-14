@@ -12,6 +12,7 @@ public class LeaderBoard : MonoBehaviour
 
 
     [SerializeField] GameObject playersHolder;
+    [SerializeField] TimerUI timer;
 
 
     [Header("Options")]
@@ -70,6 +71,9 @@ public class LeaderBoard : MonoBehaviour
 
     private void Update()
     {
-        playersHolder.SetActive(Input.GetKey(KeyCode.Tab));
+        if(timer.timeRemaining > 0)
+        {
+            playersHolder.SetActive(Input.GetKey(KeyCode.Tab));
+        }
     }
 }
