@@ -787,7 +787,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5915569953618653785
 Transform:
   m_ObjectHideFlags: 0
@@ -1786,7 +1786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 8794803335144497247}
-  minZoom: 5
+  minZoom: 3.7
   maxZoom: 7
 --- !u!114 &3877599503964559242
 MonoBehaviour:
@@ -1807,7 +1807,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5957886883461543181}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da140db32058741448592a5e3d5a00be, type: 3}
   m_Name: 
@@ -2865,6 +2865,10 @@ PrefabInstance:
       propertyPath: PlayerShoot
       value: 
       objectReference: {fileID: 3246489917008790487}
+    - target: {fileID: 1344742511508001718, guid: 33142eefb26a1dd4eb51bccdd3a14e4a, type: 3}
+      propertyPath: CurrentWeapon_Obj
+      value: 
+      objectReference: {fileID: 11400000, guid: 0bfed4b4a7a52ba48b38adf182b8004d, type: 2}
     - target: {fileID: 2696910211623583656, guid: 33142eefb26a1dd4eb51bccdd3a14e4a, type: 3}
       propertyPath: m_Name
       value: Weapon

@@ -14,7 +14,7 @@ public class WeaponBehavior : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Start()
     {
-        if (GetComponent<PhotonView>().IsMine)
+        if (GetComponent<PhotonView>().IsMine && CurrentWeapon_Obj == null)
         {
             RandomizeThisWeapon();
         }
@@ -23,7 +23,7 @@ public class WeaponBehavior : MonoBehaviourPunCallbacks, IPunObservable
     public override void OnEnable()
     {
         base.OnEnable();
-        if (GetComponent<PhotonView>().IsMine)
+        if (GetComponent<PhotonView>().IsMine && CurrentWeapon_Obj != null)
         {
             RandomizeThisWeapon();
         }
@@ -64,8 +64,6 @@ public class WeaponBehavior : MonoBehaviourPunCallbacks, IPunObservable
                 randomValue -= weapon.ProbabilitySpawning;
             }
         }
-
-        UpdateSprite();
 
         GetComponent<PhotonView>().RPC("UpdateWeaponRPC", RpcTarget.AllBuffered, Array.IndexOf(weapons, CurrentWeapon_Obj));
     }

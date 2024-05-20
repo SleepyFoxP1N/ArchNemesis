@@ -31,8 +31,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.1839, y: 0.0039, z: -2}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 0.21428572}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -52,6 +52,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7fa7dbd40bdee2c41be0cc90eacda81e, type: 2}
   - {fileID: 11400000, guid: 0bfed4b4a7a52ba48b38adf182b8004d, type: 2}
   - {fileID: 11400000, guid: 4963f58812fc3c6459e5bc3af7ca60d9, type: 2}
+  - {fileID: 11400000, guid: e8fc8836ac0b3874aaa62705ba0f21f8, type: 2}
+  - {fileID: 11400000, guid: 02143533df1523749b4565ee88ab4a09, type: 2}
+  - {fileID: 11400000, guid: d29ae0cdbc821fd4dbcecb1c05efb616, type: 2}
+  - {fileID: 11400000, guid: e649bce836c99e64c995fc3c84edbca3, type: 2}
   CurrentWeapon_Obj: {fileID: 0}
   PlayerShoot: {fileID: 0}
   WeaponUI: {fileID: 0}

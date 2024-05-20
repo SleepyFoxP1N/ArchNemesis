@@ -22,6 +22,7 @@ public class PlayerSetup : MonoBehaviour
     public void IsLocalPlayer()
     {
         gameObject.GetComponent<PlayerAim>().enabled = true;
+        gameObject.GetComponent<Health>().enabled = true;
         gameObject.GetComponent<Zoom>().enabled = true;
         gameObject.GetComponent<Player>().enabled = true;
         gameObject.GetComponent<PlayerController>().enabled = true;

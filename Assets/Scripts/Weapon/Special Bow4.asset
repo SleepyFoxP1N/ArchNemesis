@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 210c86121d358aa4484484b470f5dc44, type: 3}
+  m_Name: Special Bow4
+  m_EditorClassIdentifier: 
+  name: Star Bow
+  description: 
+  damage: 77
+  arrow: 7
+  arrowBag: 7
+  force: 77
+  timeBetweenFiring: 0.7
+  probabilitySpawning: 0.07
+  weaponSprite: {fileID: 737310223, guid: 98f1c289fb71dc04b9c051b0a72dded8, type: 3}
+  projectleSprite: {fileID: -1828548315, guid: 1feabd9acedd42245a5214d7d1d9b6f2, type: 3}
+  spriteColor:
+    serializedVersion: 2
+    rgba: 4278193407
+  spriteScale: {x: 0.7, y: 0.7}
+  impactVFX: {fileID: 4535006216103734310, guid: 98c4704d0fd7211449bcf5c451095a60, type: 3}

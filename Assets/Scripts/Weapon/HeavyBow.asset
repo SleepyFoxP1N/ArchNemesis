@@ -16,15 +16,15 @@ MonoBehaviour:
   description: "Heavy Weapon (Heavy Bowgun / Draco)\r\n\r\n  [] Max Damage\r\n\r\n 
     [] Max Attack Speed\r\n\r\n  [] Slow Movement\r\n\r\n  [] Slow Reload"
   damage: 100
-  arrow: 5
+  arrow: 3
   arrowBag: 0
   force: 200
   timeBetweenFiring: 2
-  probabilitySpawning: 0.1
+  probabilitySpawning: 0.4
   weaponSprite: {fileID: 737310223, guid: 98f1c289fb71dc04b9c051b0a72dded8, type: 3}
   projectleSprite: {fileID: 1069751094, guid: 1feabd9acedd42245a5214d7d1d9b6f2, type: 3}
   spriteColor:
     serializedVersion: 2
-    rgba: 4278190335
+    rgba: 4279980659
   spriteScale: {x: 1.5, y: 1.75}
-  impactVFX: {fileID: 9070474633162843459, guid: 356cf4dca1465b54fabbb8cd9b1cd190, type: 3}
+  impactVFX: {fileID: 358637981425055526, guid: 8eb503696b886e04faff8fc0f480d473, type: 3}

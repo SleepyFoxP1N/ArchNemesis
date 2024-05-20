@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.4049, y: 4.8058, z: 0}
-  m_LocalScale: {x: 7, y: 7, z: 1}
+  m_LocalScale: {x: 8, y: 8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsLocalBullet: 0
-  weapon: {fileID: 11400000, guid: 7fa7dbd40bdee2c41be0cc90eacda81e, type: 2}
+  weapon: {fileID: 11400000, guid: 02143533df1523749b4565ee88ab4a09, type: 2}
 --- !u!50 &-7942125299788459648
 Rigidbody2D:
   serializedVersion: 4

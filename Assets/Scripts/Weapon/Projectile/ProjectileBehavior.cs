@@ -28,7 +28,7 @@ public class ProjectileBehavior : MonoBehaviour
     {
         GetComponent<SpriteRenderer>().sprite = weapon.ProjectleSprite;
         GetComponent<SpriteRenderer>().color = weapon.SpriteColor;
-        gameObject.transform.localScale = weapon.SpriteScale * 3;
+        gameObject.transform.localScale = weapon.SpriteScale * 4;
     }
 
     private void InitializeComponents()

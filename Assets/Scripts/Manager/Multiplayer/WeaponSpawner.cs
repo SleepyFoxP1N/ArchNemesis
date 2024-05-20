@@ -1,5 +1,6 @@
 using Photon.Pun;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WeaponSpawner : MonoBehaviourPunCallbacks
@@ -14,7 +15,7 @@ public class WeaponSpawner : MonoBehaviourPunCallbacks
     {
         while (true)
         {
-            yield return new WaitForSeconds(spawnTime);
+            yield return new WaitForSecondsRealtime(spawnTime);
 
             ShuffleSpawnPoints();
 
@@ -22,12 +23,14 @@ public class WeaponSpawner : MonoBehaviourPunCallbacks
             if (emptySpawnPoint != null)
             {
                 weaponSpawned = PhotonNetwork.Instantiate(weaponPrefab.name, emptySpawnPoint.position + new Vector3(0f, 0.5f, -1f), Quaternion.identity);
+                yield return new WaitForSecondsRealtime(2);
                 GetComponent<PhotonView>().RPC("SetUpWeaponSpawn", RpcTarget.AllBuffered, weaponSpawned.GetPhotonView().ViewID, emptySpawnPoint.transform.Find("WeaponCollider").gameObject.GetPhotonView().ViewID);
             }
         }
     }
 
     [PunRPC]
+    [System.Obsolete]
     private void SetUpWeaponSpawn(int weaponViewID, int weaponSpawnCollisionID)
     {
         GameObject weaponObject = PhotonView.Find(weaponViewID).gameObject;
@@ -36,14 +39,20 @@ public class WeaponSpawner : MonoBehaviourPunCallbacks
 
         weaponObject.transform.SetParent(emptySpawnPoint);
         WeaponCollider.GetComponent<WeaponSpawnCollider>().WeaponSpawned = weaponObject;
-        emptySpawnPoint.Find("circleVFX").gameObject.SetActive(true);
+
+        GameObject vfx = emptySpawnPoint.Find("circleVFX").gameObject;
+        Weapon weapon = weaponObject.GetComponent<WeaponBehavior>().CurrentWeapon_Obj;
+
+        weaponObject.transform.localScale = weapon.SpriteScale;
+        vfx.transform.Find("Sides").GetComponent<ParticleSystem>().startColor = weapon.SpriteColor;
+        vfx.transform.Find("Sparks").GetComponent<ParticleSystem>().startColor = weapon.SpriteColor;
+        vfx.SetActive(true);
     }
 
 
     private void ShuffleSpawnPoints()
     {
-        // Fisher-Yates shuffle algorithm
-        for (int i = 0; i < spawnPoints.Length; i++)
+        for (int i = 0; i < spawnPoints.Length; i++) // ----- Fisher-Yates shuffle algorithm
         {
             int randomIndex = Random.Range(i, spawnPoints.Length);
             Transform temp = spawnPoints[randomIndex];

@@ -17,10 +17,10 @@ MonoBehaviour:
     Average Attack Speed\r\n\r\n  [] Average Movement\r\n\r\n  [] Average Reload"
   damage: 45
   arrow: 12
-  arrowBag: 7
+  arrowBag: 3
   force: 20
   timeBetweenFiring: 0.3
-  probabilitySpawning: 0.35
+  probabilitySpawning: 0.75
   weaponSprite: {fileID: 737310223, guid: 98f1c289fb71dc04b9c051b0a72dded8, type: 3}
   projectleSprite: {fileID: -1828548315, guid: 1feabd9acedd42245a5214d7d1d9b6f2, type: 3}
   spriteColor:

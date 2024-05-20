@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 210c86121d358aa4484484b470f5dc44, type: 3}
+  m_Name: Special Bow1
+  m_EditorClassIdentifier: 
+  name: Gold Bow
+  description: 
+  damage: 50
+  arrow: 2
+  arrowBag: 10
+  force: 50
+  timeBetweenFiring: 1
+  probabilitySpawning: 0.25
+  weaponSprite: {fileID: 737310223, guid: 98f1c289fb71dc04b9c051b0a72dded8, type: 3}
+  projectleSprite: {fileID: -1828548315, guid: 1feabd9acedd42245a5214d7d1d9b6f2, type: 3}
+  spriteColor:
+    serializedVersion: 2
+    rgba: 4278874790
+  spriteScale: {x: 2, y: 0.5}
+  impactVFX: {fileID: 2944396702758532163, guid: e190bf97c041e58448af6b043116cba0, type: 3}
