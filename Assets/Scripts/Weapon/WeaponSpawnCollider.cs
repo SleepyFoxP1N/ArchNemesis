@@ -29,7 +29,6 @@ public class WeaponSpawnCollider : MonoBehaviour
         playerWeapon.GetComponent<PhotonView>().RPC("UpdateWeaponRPC", RpcTarget.AllBuffered, Array.IndexOf(playerWeapon.GetComponent<WeaponBehavior>().weapons, weaponObj));
         
         circleVFX.SetActive(false);
-        gameObject.SetActive(false);
 
         if (GetComponent<PhotonView>().IsMine)
         {

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Singletons
   - Leaderboard
+  - border
   layers:
   - Default
   - TransparentFX

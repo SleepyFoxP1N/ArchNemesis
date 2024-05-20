@@ -15,7 +15,7 @@ MonoBehaviour:
   name: MiniElven
   description: "\u2022 Light weapon (Lightbow / Elven)\r\n\r\n  [] Low Damage\n\r\n 
     [] Fast Attack Speed\r\n\r\n  [] Fast Movement\r\n\r\n  [] Fast Reload"
-  damage: 5
+  damage: 15
   arrow: 30
   arrowBag: 3
   force: 45

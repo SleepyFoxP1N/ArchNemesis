@@ -4,32 +4,25 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
-using UnityEngine.UIElements;
 
 public class RoomList : MonoBehaviourPunCallbacks
 {
     public static RoomList instance;
 
-
     public GameObject roomManager_GameObject;
     public RoomManager roomManager_Script;
-
 
     [Header("UI")]
     [SerializeField] Transform roomListParent;
     [SerializeField] GameObject roomListItemPrefab;
 
-
-
     // ===== ===== ===== ===== ===== ROOM VARIABLES
     private List<RoomInfo> cachedRoomList = new List<RoomInfo>();
-
 
     private void Awake()
     {
         instance = this;
     }
-
 
     IEnumerator Start()
     {
@@ -42,9 +35,10 @@ public class RoomList : MonoBehaviourPunCallbacks
 
         yield return new WaitUntil(() => !PhotonNetwork.IsConnected);
 
+        // Ensure we are using the best region
+        PhotonNetwork.PhotonServerSettings.AppSettings.FixedRegion = null; // Ensures no fixed region is set
         PhotonNetwork.ConnectUsingSettings();
     }
-
 
     public override void OnConnectedToMaster()
     {
@@ -52,7 +46,6 @@ public class RoomList : MonoBehaviourPunCallbacks
 
         PhotonNetwork.JoinLobby();
     }
-
 
     public override void OnRoomListUpdate(List<RoomInfo> _roomList)
     {
@@ -87,8 +80,7 @@ public class RoomList : MonoBehaviourPunCallbacks
         UpdateUI();
     }
 
-
-    void UpdateUI() 
+    void UpdateUI()
     {
         foreach (Transform roomItem in roomListParent)
         {
@@ -107,7 +99,6 @@ public class RoomList : MonoBehaviourPunCallbacks
         }
     }
 
-
     public void JoinRoomByName(string _name)
     {
         roomManager_Script.roomNameToJoin = _name;
@@ -115,7 +106,6 @@ public class RoomList : MonoBehaviourPunCallbacks
         gameObject.SetActive(false);
     }
 
-    
     public void ChangeRoomToCreateName(string _roomName)
     {
         roomManager_Script.roomNameToJoin = _roomName;

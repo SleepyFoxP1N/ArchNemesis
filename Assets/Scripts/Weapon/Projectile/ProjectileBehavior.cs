@@ -83,6 +83,7 @@ public class ProjectileBehavior : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Health health = other.GetComponent<Health>();
+        if (other.CompareTag("border")) return;
 
         if (health == null)
         {

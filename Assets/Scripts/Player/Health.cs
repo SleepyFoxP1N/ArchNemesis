@@ -7,23 +7,19 @@ public class Health : MonoBehaviour
     public int health;
     public bool isLocalPlayer;
 
-
     [SerializeField] Transform healthBar;
     private float originalHealthBarSize;
 
     [Header("UI")]
-    [SerializeField] Transform healthBarUI;
-    private float originalHealthBarUISize;
+    [SerializeField] RectTransform healthBarUI; 
+    private float originalHealthBarUIWidth;
     [SerializeField] TextMeshProUGUI healthText;
-
-
 
     private void Start()
     {
         originalHealthBarSize = healthBar.localScale.x;
-        originalHealthBarUISize = healthBar.localScale.x;
+        originalHealthBarUIWidth = healthBarUI.sizeDelta.x;
     }
-
 
     [PunRPC]
     public void TakeDamage(int _damage)
@@ -31,20 +27,19 @@ public class Health : MonoBehaviour
         health -= _damage;
 
         healthBar.localScale = new Vector3(originalHealthBarSize * health / 100f, healthBar.localScale.y, healthBar.localScale.z);
+        healthBarUI.sizeDelta = new Vector2(originalHealthBarUIWidth * health / 100f, healthBarUI.sizeDelta.y);
 
-        healthBarUI.localScale = new Vector3(originalHealthBarUISize * health / 100f, healthBarUI.localScale.y, healthBarUI.localScale.z);
-        healthText.text = "HP:"+health.ToString();
+        healthText.text = "HP:" + health.ToString();
 
         if (health <= 0)
         {
             if (isLocalPlayer)
             {
-                RoomManager.instance.SpawnPlayer(); 
-                
+                RoomManager.instance.SpawnPlayer();
                 RoomManager.instance.deaths++;
                 RoomManager.instance.SetHashes();
             }
-
+            PhotonNetwork.Instantiate("Dead", gameObject.transform.position, Quaternion.identity);
             PhotonView.Destroy(gameObject);
         }
     }

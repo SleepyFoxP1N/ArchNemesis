@@ -26,5 +26,5 @@ MonoBehaviour:
   spriteColor:
     serializedVersion: 2
     rgba: 4278190335
-  spriteScale: {x: 2.5, y: 2.5}
+  spriteScale: {x: 1.5, y: 1.75}
   impactVFX: {fileID: 9070474633162843459, guid: 356cf4dca1465b54fabbb8cd9b1cd190, type: 3}
